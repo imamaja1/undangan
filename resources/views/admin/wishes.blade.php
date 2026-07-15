@@ -1,49 +1,49 @@
 @extends('layouts.admin')
 
 @section('content')
-<div>
-    <div class="flex items-center justify-between mb-6">
+<div class="space-y-6">
+    <div class="flex items-center justify-between">
         <div>
-            <h1 class="text-2xl font-serif font-bold text-gray-800">Ucapan & Doa</h1>
-            <p class="text-gray-500 text-sm mt-1">Lihat dan kelola ucapan dari tamu.</p>
+            <h1 class="text-xl font-bold text-gray-900">Ucapan & Doa</h1>
+            <p class="text-sm text-gray-500 mt-0.5">Lihat dan kelola ucapan dari tamu.</p>
         </div>
-        <span class="text-sm text-gray-500">{{ $wishes->total() }} ucapan</span>
+        <span class="text-sm text-gray-500 font-medium">{{ $wishes->total() }} ucapan</span>
     </div>
 
-    <div class="mb-4">
-        <input type="text" id="wishSearch" oninput="filterTable('wishTable', this.value)" placeholder="Cari ucapan..." class="px-4 py-2 border border-cream-dark rounded-lg text-sm w-full max-w-xs focus:ring-2 focus:ring-gold focus:border-gold outline-none">
+    <div>
+        <input type="text" id="wishSearch" oninput="filterTable('wishTable', this.value)" placeholder="Cari ucapan..." class="w-full sm:max-w-xs px-3 py-2 rounded-lg border border-gray-300 text-sm shadow-sm focus:ring-2 focus:ring-gray-900/10 focus:border-gray-900 outline-none transition">
     </div>
 
-    <div class="bg-white rounded-xl shadow-sm border border-cream-dark overflow-hidden">
+    <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
         <table class="w-full text-sm" id="wishTable">
-            <thead class="bg-cream">
-                <tr>
-                    <th class="text-left px-4 py-3 font-semibold text-gray-700">#</th>
-                    <th class="text-left px-4 py-3 font-semibold text-gray-700">Nama</th>
-                    <th class="text-left px-4 py-3 font-semibold text-gray-700">Ucapan</th>
-                    <th class="text-left px-4 py-3 font-semibold text-gray-700">Tanggal</th>
-                    <th class="text-left px-4 py-3 font-semibold text-gray-700">Aksi</th>
+            <thead>
+                <tr class="bg-gray-50 border-b border-gray-200">
+                    <th class="text-left px-4 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wider">#</th>
+                    <th class="text-left px-4 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wider">Nama</th>
+                    <th class="text-left px-4 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wider">Ucapan</th>
+                    <th class="text-left px-4 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wider">Tanggal</th>
+                    <th class="text-right px-4 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wider">Aksi</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody class="divide-y divide-gray-100">
                 @forelse($wishes as $wish)
-                <tr class="border-t border-cream-dark hover:bg-cream/50">
-                    <td class="px-4 py-3">{{ $wishes->firstItem() + $loop->index }}</td>
-                    <td class="px-4 py-3 font-medium">{{ $wish->name }}</td>
-                    <td class="px-4 py-3 text-gray-500 max-w-xs truncate">{{ $wish->message }}</td>
-                    <td class="px-4 py-3 text-xs text-gray-400">{{ $wish->created_at->format('d M Y H:i') }}</td>
-                    <td class="px-4 py-3">
-                        <button onclick="deleteWish('{{ $wish->id }}')" class="p-1.5 text-red-600 hover:bg-red-50 rounded transition-colors text-xs">Hapus</button>
+                <tr class="hover:bg-gray-50 transition-colors">
+                    <td class="px-4 py-3 text-gray-500">{{ $wishes->firstItem() + $loop->index }}</td>
+                    <td class="px-4 py-3 font-medium text-gray-900">{{ $wish->name }}</td>
+                    <td class="px-4 py-3 text-gray-600 max-w-xs truncate">{{ $wish->message }}</td>
+                    <td class="px-4 py-3 text-gray-400 text-xs">{{ $wish->created_at->format('d M Y H:i') }}</td>
+                    <td class="px-4 py-3 text-right">
+                        <button onclick="deleteWish('{{ $wish->id }}')" class="px-2.5 py-1.5 text-xs font-medium text-red-500 hover:text-red-700 hover:bg-red-50 rounded-md transition-colors">Hapus</button>
                     </td>
                 </tr>
                 @empty
-                <tr><td colspan="5" class="px-4 py-8 text-center text-gray-400">Belum ada ucapan.</td></tr>
+                <tr><td colspan="5" class="px-4 py-12 text-center text-sm text-gray-400">Belum ada ucapan.</td></tr>
                 @endforelse
             </tbody>
         </table>
     </div>
 
-    <div class="mt-6">
+    <div>
         {{ $wishes->links() }}
     </div>
 </div>
@@ -51,22 +51,7 @@
 
 @push('scripts')
 <script>
-async function deleteWish(id) {
-    if (!confirm('Hapus ucapan ini?')) return;
-    try {
-        const res = await fetch('{{ route("admin.wishes.destroy", "__id__") }}'.replace('__id__', id), {
-            method: 'DELETE', headers: { 'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content, 'Accept': 'application/json' }
-        });
-        const r = await res.json();
-        if (r.success) { showToast(r.message, 'success'); location.reload(); }
-        else showToast(r.message || 'Gagal', 'error');
-    } catch(e) { showToast('Gagal menghapus.', 'error'); }
-}
-
-function filterTable(tableId, query) {
-    document.querySelectorAll(`#${tableId} tbody tr`).forEach(row => {
-        row.style.display = row.textContent.toLowerCase().includes(query.toLowerCase()) ? '' : 'none';
-    });
-}
+async function deleteWish(id) { if (!confirm('Hapus?')) return; try { const res = await fetch('{{ route("admin.wishes.destroy", "__id__") }}'.replace('__id__', id), { method:'DELETE', headers: { 'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content, 'Accept':'application/json' } }); const r = await res.json(); if (r.success) { showToast(r.message, 'success'); location.reload(); } else showToast(r.message || 'Gagal', 'error'); } catch(e) { showToast('Gagal.', 'error'); } }
+function filterTable(tableId, query) { document.querySelectorAll(`#${tableId} tbody tr`).forEach(row => { row.style.display = row.textContent.toLowerCase().includes(query.toLowerCase()) ? '' : 'none'; }); }
 </script>
 @endpush

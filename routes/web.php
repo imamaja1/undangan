@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\AssetController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\EventController;
 use App\Http\Controllers\Admin\GalleryController;
@@ -54,6 +55,11 @@ Route::middleware('auth')->prefix('admin')->name('admin.')->group(function () {
     // Image upload + list
     Route::post('/upload', [UploadController::class, 'upload'])->name('upload');
     Route::get('/images', [UploadController::class, 'images'])->name('images');
+
+    // Asset (background & audio)
+    Route::get('/assets', [AssetController::class, 'index'])->name('assets.index');
+    Route::post('/assets/bg', [AssetController::class, 'uploadBg'])->name('assets.uploadBg');
+    Route::post('/assets/audio', [AssetController::class, 'uploadAudio'])->name('assets.uploadAudio');
 });
 
 require __DIR__.'/auth.php';

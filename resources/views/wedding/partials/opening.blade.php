@@ -1,10 +1,13 @@
-<section id="opening" class="py-16 md:py-24 bg-white">
-    <div class="max-w-3xl mx-auto px-6 text-center">
-        <p class="font-script text-3xl md:text-4xl text-gold mb-6" data-reveal="fade">
-            {{ $wedding->quotes['opening'] ?? 'Assalamu\'alaikum Wr. Wb.' }}
-        </p>
-        <p class="text-gray-700 leading-relaxed text-base md:text-lg" data-reveal="up" data-reveal-delay="200">
-            {{ $wedding->quotes['openingText'] ?? '' }}
-        </p>
+<section id="opening" class="min-h-screen flex items-center justify-center section-bg overlay-dark" style="background-image: url('{{ asset('images/hero/opening-bg.jpg') }}')">
+    <div class="relative z-10 w-full max-w-lg mx-auto px-6 text-center py-16">
+        <div class="glass rounded-2xl p-8 md:p-14 shadow-2xl" data-reveal="fade">
+            <p class="font-serif text-xl md:text-2xl text-white/80 font-light italic leading-relaxed text-shadow">
+                {{ $wedding->quotes['opening'] ?? 'Assalamu\'alaikum Wr. Wb.' }}
+            </p>
+            <div class="w-12 h-px bg-white/20 mx-auto my-6"></div>
+            <p class="font-sans text-sm text-gray-300 font-light leading-relaxed">
+                {{ $wedding->quotes['openingText'] ?? '' }}
+            </p>
+        </div>
     </div>
 </section>

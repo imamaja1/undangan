@@ -6,7 +6,8 @@ window.openInvitation = function() {
         cover.style.transform = 'translateY(-100%)';
         setTimeout(() => {
             cover.style.display = 'none';
-        }, 700);
+            document.body.classList.remove('overflow-hidden');
+        }, 1000);
     }
     
     const audio = document.getElementById('bgMusic');
@@ -21,6 +22,8 @@ window.openInvitation = function() {
 };
 
 document.addEventListener('DOMContentLoaded', () => {
+    document.body.classList.add('overflow-hidden');
+
     const musicBtn = document.getElementById('musicControl');
     const audio = document.getElementById('bgMusic');
     
@@ -28,7 +31,6 @@ document.addEventListener('DOMContentLoaded', () => {
         musicBtn.addEventListener('click', () => {
             if (audio.paused) {
                 audio.play();
-                musicBtn.classList.remove('animate-spin');
                 musicBtn.querySelector('svg').innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.536 8.464a5 5 0 010 7.072M17.95 6.05a8 8 0 010 11.9M6.5 8.8l5.5-4v14.4l-5.5-4H4a1 1 0 01-1-1v-4.4a1 1 0 011-1h2.5z"/>';
             } else {
                 audio.pause();
