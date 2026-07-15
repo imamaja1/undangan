@@ -1,0 +1,108 @@
+@import 'tailwindcss';
+
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+@source '../../storage/framework/views/*.php';
+
+@theme {
+    --font-script: 'Great Vibes', cursive;
+    --font-serif: 'Playfair Display', serif;
+    --font-sans: 'Poppins', 'Instrument Sans', ui-sans-serif, system-ui, sans-serif;
+
+    --color-gold: #C9A227;
+    --color-gold-dark: #A68520;
+    --color-cream: #FAF7F2;
+    --color-cream-dark: #E9DFC8;
+}
+
+#wishList::-webkit-scrollbar {
+    width: 6px;
+}
+#wishList::-webkit-scrollbar-track {
+    background: transparent;
+}
+#wishList::-webkit-scrollbar-thumb {
+    background: #C9A227;
+    border-radius: 3px;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+.animate-fadeIn {
+    animation: fadeIn 0.4s ease;
+}
+
+@keyframes fadeUp {
+    from { opacity: 0; transform: translateY(40px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeLeft {
+    from { opacity: 0; transform: translateX(-40px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes fadeRight {
+    from { opacity: 0; transform: translateX(40px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes scaleIn {
+    from { opacity: 0; transform: scale(0.9); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes pulseGold {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(201, 162, 39, 0.4); }
+    50% { box-shadow: 0 0 0 12px rgba(201, 162, 39, 0); }
+}
+
+[data-reveal] {
+    opacity: 0;
+}
+
+[data-reveal].revealed {
+    animation-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+[data-reveal="up"].revealed {
+    animation: fadeUp 0.7s ease forwards;
+}
+
+[data-reveal="left"].revealed {
+    animation: fadeLeft 0.7s ease forwards;
+}
+
+[data-reveal="right"].revealed {
+    animation: fadeRight 0.7s ease forwards;
+}
+
+[data-reveal="scale"].revealed {
+    animation: scaleIn 0.6s ease forwards;
+}
+
+[data-reveal="fade"].revealed {
+    animation: fadeIn 0.5s ease forwards;
+}
+
+[data-reveal-delay="100"].revealed { animation-delay: 0.1s; }
+[data-reveal-delay="200"].revealed { animation-delay: 0.2s; }
+[data-reveal-delay="300"].revealed { animation-delay: 0.3s; }
+[data-reveal-delay="400"].revealed { animation-delay: 0.4s; }
+[data-reveal-delay="500"].revealed { animation-delay: 0.5s; }
+[data-reveal-delay="600"].revealed { animation-delay: 0.6s; }
+[data-reveal-delay="700"].revealed { animation-delay: 0.7s; }
+[data-reveal-delay="800"].revealed { animation-delay: 0.8s; }
+
+.countdown-pulse {
+    animation: pulseGold 2s infinite;
+}
+
+@keyframes floatUpDown {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+}
+.float-animation {
+    animation: floatUpDown 3s ease-in-out infinite;
+}
