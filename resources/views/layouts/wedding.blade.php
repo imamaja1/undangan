@@ -8,7 +8,7 @@
     <meta name="description" content="Undangan Pernikahan {{ $wedding->couple['groomName'] ?? '' }} & {{ $wedding->couple['brideName'] ?? '' }}">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
-<body class="bg-black text-white font-sans overflow-x-hidden antialiased">
+<body class="bg-warm-dark text-white font-sans overflow-x-hidden antialiased">
 
     @yield('content')
 

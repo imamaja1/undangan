@@ -2,18 +2,17 @@
 
 @section('content')
 <div>
-    <h1 class="text-2xl font-serif font-bold text-gray-800">Asset & Media</h1>
-    <p class="text-gray-500 text-sm mt-1">Upload gambar background untuk setiap section landing page dan background music.</p>
+    <h1 class="text-xl font-bold text-gray-900">Asset & Media</h1>
+    <p class="text-sm text-gray-500 mt-0.5">Upload gambar background untuk setiap section landing page dan background music.</p>
 
-    <!-- Background Images -->
     <div class="mt-8">
-        <h2 class="text-lg font-serif font-bold text-gray-800 mb-1">Background Section</h2>
-        <p class="text-xs text-gray-400 mb-4">14 section landing page. Upload file JPG/PNG/WebP (maks 20MB). Nama file otomatis: <code class="bg-gray-100 px-1 rounded">images/hero/{section}-bg.jpg</code></p>
+        <h2 class="text-sm font-semibold text-gray-600 uppercase tracking-wider mb-1">Background Section</h2>
+        <p class="text-xs text-gray-400 mb-4">14 section landing page. Upload file JPG/PNG/WebP (maks 20MB).</p>
 
         <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-7 gap-4">
             @foreach($assets as $key => $asset)
-            <div class="bg-white rounded-xl shadow-sm border border-cream-dark overflow-hidden hover:shadow-md transition-shadow">
-                <div class="aspect-[3/2] bg-cream-dark relative overflow-hidden">
+            <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden hover:shadow-md transition-shadow">
+                <div class="aspect-[3/2] bg-gray-100 relative overflow-hidden">
                     @if($asset['exists'])
                     <img src="{{ $asset['url'] }}" alt="{{ $asset['label'] }}" class="w-full h-full object-cover">
                     @else
@@ -31,25 +30,29 @@
                     @else
                     <p class="text-[10px] text-red-400">Belum diupload</p>
                     @endif
-                    <label class="mt-2 block text-center text-[10px] font-medium text-gold bg-cream hover:bg-gold hover:text-white rounded-md py-1.5 cursor-pointer transition-colors border border-cream-dark hover:border-gold">
-                        <span id="label-{{ $key }}">Upload</span>
-                        <input type="file" accept="image/*" class="hidden" onchange="uploadBg(this, '{{ $key }}')">
-                    </label>
+                    <div class="flex gap-1 mt-2">
+                        <label class="flex-1 text-center text-[10px] font-medium text-gray-700 bg-gray-100 hover:bg-gray-200 rounded-md py-1.5 cursor-pointer transition-colors border border-gray-200">
+                            <span id="label-{{ $key }}">Upload</span>
+                            <input type="file" accept="image/*" class="hidden" onchange="uploadBg(this, '{{ $key }}')">
+                        </label>
+                        @if($asset['exists'])
+                        <button onclick="deleteBg('{{ $key }}')" class="flex-1 text-center text-[10px] font-medium text-red-500 bg-red-50 hover:bg-red-100 rounded-md py-1.5 cursor-pointer transition-colors border border-red-200">Hapus</button>
+                        @endif
+                    </div>
                 </div>
             </div>
             @endforeach
         </div>
     </div>
 
-    <!-- Audio Section -->
     <div class="mt-10">
-        <h2 class="text-lg font-serif font-bold text-gray-800 mb-1">Background Music</h2>
-        <p class="text-xs text-gray-400 mb-4">Upload MP3/WAV/OGG (maks 30MB). Nama file otomatis: <code class="bg-gray-100 px-1 rounded">audio/wedding.mp3</code></p>
+        <h2 class="text-sm font-semibold text-gray-600 uppercase tracking-wider mb-1">Background Music</h2>
+        <p class="text-xs text-gray-400 mb-4">Upload MP3/WAV/OGG (maks 30MB).</p>
 
-        <div class="bg-white rounded-xl shadow-sm border border-cream-dark p-6 flex items-center gap-6 max-w-xl">
-            <div class="w-16 h-16 bg-cream rounded-xl flex items-center justify-center shrink-0">
+        <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6 flex items-center gap-6 max-w-xl">
+            <div class="w-16 h-16 bg-gray-100 rounded-xl flex items-center justify-center shrink-0">
                 @if($audio['exists'])
-                <svg class="w-8 h-8 text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3"/></svg>
+                <svg class="w-8 h-8 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3"/></svg>
                 @else
                 <svg class="w-8 h-8 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3"/></svg>
                 @endif
@@ -66,9 +69,9 @@
                 <p class="text-xs text-gray-400 mt-0.5">Upload background music untuk undangan</p>
                 @endif
             </div>
-            <label class="shrink-0 px-4 py-2 bg-cream hover:bg-gold hover:text-white text-gold text-xs font-medium rounded-lg cursor-pointer transition-colors border border-cream-dark hover:border-gold" id="audioLabel">
+            <label class="shrink-0 px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-700 text-xs font-medium rounded-lg cursor-pointer transition-colors border border-gray-200" id="audioLabel">
                 Upload
-                <input type="file" accept="audio/*" class="hidden" onchange="uploadAudio(this)">
+                <input type="file" accept="audio/mpeg,audio/wav,audio/ogg" class="hidden" onchange="uploadAudio(this)">
             </label>
         </div>
     </div>
@@ -82,6 +85,7 @@ async function uploadBg(input, section) {
     if (!file) return;
 
     const label = document.getElementById('label-' + section);
+    if (!label) return;
     const original = label.textContent;
     label.textContent = 'Uploading...';
     label.classList.add('pointer-events-none', 'opacity-50');
@@ -93,7 +97,7 @@ async function uploadBg(input, section) {
     try {
         const res = await fetch('{{ route("admin.assets.uploadBg") }}', {
             method: 'POST',
-            headers: { 'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content },
+            headers: { 'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content, 'Accept': 'application/json' },
             body: formData
         });
         const data = await res.json();
@@ -104,11 +108,30 @@ async function uploadBg(input, section) {
             showToast(data.message || 'Upload gagal', 'error');
         }
     } catch(e) {
-        showToast('Upload gagal', 'error');
+        showToast('Upload gagal: ' + e.message, 'error');
     }
 
     label.textContent = original;
     label.classList.remove('pointer-events-none', 'opacity-50');
+}
+
+async function deleteBg(section) {
+    if (!confirm('Hapus background section ini?')) return;
+    try {
+        const res = await fetch('{{ route("admin.assets.deleteBg", "__section__") }}'.replace('__section__', section), {
+            method: 'DELETE',
+            headers: { 'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content, 'Accept': 'application/json' }
+        });
+        const data = await res.json();
+        if (data.success) {
+            showToast(data.message, 'success');
+            setTimeout(() => location.reload(), 400);
+        } else {
+            showToast(data.message || 'Gagal menghapus', 'error');
+        }
+    } catch(e) {
+        showToast('Gagal menghapus', 'error');
+    }
 }
 
 async function uploadAudio(input) {
@@ -116,6 +139,7 @@ async function uploadAudio(input) {
     if (!file) return;
 
     const label = document.getElementById('audioLabel');
+    if (!label) return;
     const original = label.textContent;
     label.textContent = 'Uploading...';
     label.classList.add('pointer-events-none', 'opacity-50');
@@ -126,7 +150,7 @@ async function uploadAudio(input) {
     try {
         const res = await fetch('{{ route("admin.assets.uploadAudio") }}', {
             method: 'POST',
-            headers: { 'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content },
+            headers: { 'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content, 'Accept': 'application/json' },
             body: formData
         });
         const data = await res.json();
@@ -137,7 +161,7 @@ async function uploadAudio(input) {
             showToast(data.message || 'Upload gagal', 'error');
         }
     } catch(e) {
-        showToast('Upload gagal', 'error');
+        showToast('Upload gagal: ' + e.message, 'error');
     }
 
     label.textContent = original;

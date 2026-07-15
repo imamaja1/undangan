@@ -59,6 +59,7 @@ Route::middleware('auth')->prefix('admin')->name('admin.')->group(function () {
     // Asset (background & audio)
     Route::get('/assets', [AssetController::class, 'index'])->name('assets.index');
     Route::post('/assets/bg', [AssetController::class, 'uploadBg'])->name('assets.uploadBg');
+    Route::delete('/assets/bg/{section}', [AssetController::class, 'deleteBg'])->name('assets.deleteBg');
     Route::post('/assets/audio', [AssetController::class, 'uploadAudio'])->name('assets.uploadAudio');
 });
 

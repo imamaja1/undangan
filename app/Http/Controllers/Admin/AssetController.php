@@ -41,11 +41,9 @@ class AssetController extends Controller
 
         $audioPath = public_path('audio/wedding.mp3');
         $audio = [
-            'label'   => 'Background Music',
-            'file'    => 'audio/wedding.mp3',
-            'exists'  => file_exists($audioPath) && filesize($audioPath) > 0,
-            'url'     => (file_exists($audioPath) && filesize($audioPath) > 0) ? asset('audio/wedding.mp3') : null,
-            'size'    => (file_exists($audioPath) && filesize($audioPath) > 0) ? $this->formatSize(filesize($audioPath)) : null,
+            'exists' => file_exists($audioPath) && filesize($audioPath) > 0,
+            'url'    => (file_exists($audioPath) && filesize($audioPath) > 0) ? asset('audio/wedding.mp3?v=' . filemtime($audioPath)) : null,
+            'size'   => (file_exists($audioPath) && filesize($audioPath) > 0) ? $this->formatSize(filesize($audioPath)) : null,
         ];
 
         return view('admin.assets', compact('assets', 'audio'));
@@ -64,21 +62,36 @@ class AssetController extends Controller
             mkdir($dir, 0755, true);
         }
 
-        $request->file('image')->move($dir, "{$section}-bg.jpg");
-
-        $url = asset("images/hero/{$section}-bg.jpg?v=" . time());
+        $file = $request->file('image');
+        $file->move($dir, "{$section}-bg.jpg");
 
         return response()->json([
             'success' => true,
             'message' => "Background {$this->sections[$section]} berhasil diupload.",
-            'url'     => $url,
+        ]);
+    }
+
+    public function deleteBg($section)
+    {
+        if (!array_key_exists($section, $this->sections)) {
+            return response()->json(['success' => false, 'message' => 'Section tidak valid.'], 400);
+        }
+
+        $path = public_path("images/hero/{$section}-bg.jpg");
+        if (file_exists($path)) {
+            unlink($path);
+        }
+
+        return response()->json([
+            'success' => true,
+            'message' => "Background {$this->sections[$section]} berhasil dihapus.",
         ]);
     }
 
     public function uploadAudio(Request $request)
     {
         $request->validate([
-            'audio' => 'required|mimes:mp3,mpeg,wav,ogg|max:30720',
+            'audio' => 'required|file|mimes:mp3,mpeg,mpga,wav,ogg|max:30720',
         ]);
 
         $dir = public_path('audio');
@@ -86,12 +99,27 @@ class AssetController extends Controller
             mkdir($dir, 0755, true);
         }
 
-        $request->file('audio')->move($dir, 'wedding.mp3');
+        try {
+            $file = $request->file('audio');
+            if (!$file || !$file->isValid()) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'File tidak valid atau rusak.',
+                ], 422);
+            }
 
-        return response()->json([
-            'success' => true,
-            'message' => 'Background music berhasil diupload.',
-        ]);
+            $file->move($dir, 'wedding.mp3');
+
+            return response()->json([
+                'success' => true,
+                'message' => 'Background music berhasil diupload.',
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Upload gagal: ' . $e->getMessage(),
+            ], 500);
+        }
     }
 
     private function formatSize(int $bytes): string
