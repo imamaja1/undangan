@@ -1,4 +1,4 @@
-<div id="coverSection" class="fixed inset-0 z-50 flex flex-col items-center justify-center section-bg overlay-warm-dark min-h-[100dvh] overflow-y-auto" style="background-image: url('{{ asset('images/hero/cover-bg.jpg') }}?v={{ @filemtime(public_path('images/hero/cover-bg.jpg')) }}?v={{ filemtime(public_path('images/hero/cover-bg.jpg')) }}')">
+<div id="coverSection" class="fixed inset-0 z-50 flex flex-col items-center justify-center section-bg overlay-warm-dark min-h-[100dvh] overflow-y-auto" style="background-image: url('{{ asset('images/hero/cover-bg.jpg') }}?v={{ file_exists(public_path('images/hero/cover-bg.jpg')) ? filemtime(public_path('images/hero/cover-bg.jpg')) : time() }}')">
     {{-- Particles --}}
     <div class="particle-container" id="coverParticles"></div>
 

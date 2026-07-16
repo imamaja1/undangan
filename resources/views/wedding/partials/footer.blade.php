@@ -1,4 +1,4 @@
-<footer id="footer" class="py-20 section-bg overlay-warm-dark" style="background-image: url('{{ asset('images/hero/footer-bg.jpg') }}?v={{ @filemtime(public_path('images/hero/footer-bg.jpg')) }}')">
+<footer id="footer" class="py-20 section-bg overlay-warm-dark" style="background-image: url('{{ asset('images/hero/footer-bg.jpg') }}?v={{ file_exists(public_path('images/hero/footer-bg.jpg')) ? filemtime(public_path('images/hero/footer-bg.jpg')) : time() }}')">
     <div class="particle-container" id="footerParticles"></div>
     <div class="relative z-10 max-w-lg mx-auto px-6 text-center">
         <p class="font-script text-3xl md:text-4xl text-rose-base/50 mb-6" data-reveal="fade">
