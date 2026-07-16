@@ -61,6 +61,7 @@ Route::middleware('auth')->prefix('admin')->name('admin.')->group(function () {
     Route::post('/assets/bg', [AssetController::class, 'uploadBg'])->name('assets.uploadBg');
     Route::delete('/assets/bg/{section}', [AssetController::class, 'deleteBg'])->name('assets.deleteBg');
     Route::post('/assets/audio', [AssetController::class, 'uploadAudio'])->name('assets.uploadAudio');
+    Route::delete('/assets/audio', [AssetController::class, 'deleteAudio'])->name('assets.deleteAudio');
 });
 
 require __DIR__.'/auth.php';

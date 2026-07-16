@@ -17,7 +17,7 @@
         <input type="text" id="storySearch" oninput="filterTable('storyTable', this.value)" placeholder="Cari story..." class="w-full sm:max-w-xs px-3 py-2 rounded-lg border border-gray-300 text-sm shadow-sm focus:ring-2 focus:ring-gray-900/10 focus:border-gray-900 outline-none transition">
     </div>
 
-    <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+    <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden overflow-x-auto">
         <table class="w-full text-sm" id="storyTable">
             <thead>
                 <tr class="bg-gray-50 border-b border-gray-200">

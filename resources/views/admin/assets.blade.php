@@ -69,10 +69,17 @@
                 <p class="text-xs text-gray-400 mt-0.5">Upload background music untuk undangan</p>
                 @endif
             </div>
-            <label class="shrink-0 px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-700 text-xs font-medium rounded-lg cursor-pointer transition-colors border border-gray-200" id="audioLabel">
-                Upload
-                <input type="file" accept="audio/mpeg,audio/wav,audio/ogg" class="hidden" onchange="uploadAudio(this)">
-            </label>
+            <div class="flex gap-2">
+                <label class="shrink-0 px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-700 text-xs font-medium rounded-lg cursor-pointer transition-colors border border-gray-200" id="audioLabel">
+                    Upload
+                    <input type="file" accept="audio/mpeg,audio/wav,audio/ogg" class="hidden" onchange="uploadAudio(this)">
+                </label>
+                @if($audio['exists'])
+                <button onclick="deleteAudio()" class="shrink-0 px-4 py-2 bg-red-50 hover:bg-red-100 text-red-500 text-xs font-medium rounded-lg cursor-pointer transition-colors border border-red-200">
+                    Hapus
+                </button>
+                @endif
+            </div>
         </div>
     </div>
 </div>
@@ -166,6 +173,25 @@ async function uploadAudio(input) {
 
     label.textContent = original;
     label.classList.remove('pointer-events-none', 'opacity-50');
+}
+
+async function deleteAudio() {
+    if (!confirm('Hapus background music ini?')) return;
+    try {
+        const res = await fetch('{{ route("admin.assets.deleteAudio") }}', {
+            method: 'DELETE',
+            headers: { 'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content, 'Accept': 'application/json' }
+        });
+        const data = await res.json();
+        if (data.success) {
+            showToast(data.message, 'success');
+            setTimeout(() => location.reload(), 400);
+        } else {
+            showToast(data.message || 'Gagal menghapus', 'error');
+        }
+    } catch(e) {
+        showToast('Gagal menghapus', 'error');
+    }
 }
 </script>
 @endpush

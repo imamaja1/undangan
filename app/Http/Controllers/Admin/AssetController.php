@@ -122,6 +122,23 @@ class AssetController extends Controller
         }
     }
 
+    public function deleteAudio()
+    {
+        $path = public_path('audio/wedding.mp3');
+        if (file_exists($path)) {
+            unlink($path);
+            return response()->json([
+                'success' => true,
+                'message' => 'Background music berhasil dihapus.',
+            ]);
+        }
+
+        return response()->json([
+            'success' => false,
+            'message' => 'File tidak ditemukan.',
+        ], 404);
+    }
+
     private function formatSize(int $bytes): string
     {
         if ($bytes >= 1048576) return round($bytes / 1048576, 1) . ' MB';

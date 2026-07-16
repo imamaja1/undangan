@@ -8,9 +8,9 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body class="h-full bg-gray-50">
-    <div class="flex h-full">
+    <div class="flex h-screen overflow-hidden">
         {{-- Sidebar — Filament style dark --}}
-        <aside class="fixed inset-y-0 left-0 z-40 w-64 flex flex-col bg-gray-950 text-gray-300">
+        <aside class="hidden lg:flex fixed inset-y-0 left-0 z-40 w-64 flex-col bg-gray-950 text-gray-300">
             {{-- Logo --}}
             <div class="flex items-center gap-3 px-6 h-16 border-b border-gray-800 shrink-0">
                 <div class="w-8 h-8 rounded-lg bg-white/10 flex items-center justify-center">
@@ -58,7 +58,7 @@
         </aside>
 
         {{-- Main content --}}
-        <div class="flex-1 flex flex-col lg:pl-64">
+        <div class="flex-1 flex flex-col lg:pl-64 h-screen overflow-y-auto">
             {{-- Top bar --}}
             <header class="sticky top-0 z-30 h-16 bg-white border-b border-gray-200 flex items-center px-6 gap-4 shrink-0">
                 <button onclick="document.getElementById('mobileSidebar')?.classList.toggle('hidden')" class="lg:hidden text-gray-500 hover:text-gray-700">

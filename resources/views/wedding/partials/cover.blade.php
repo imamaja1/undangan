@@ -1,38 +1,38 @@
-<div id="coverSection" class="fixed inset-0 z-50 flex flex-col items-center justify-center section-bg overlay-warm-dark min-h-[100dvh]" style="background-image: url('{{ asset('images/hero/cover-bg.jpg') }}')">
+<div id="coverSection" class="fixed inset-0 z-50 flex flex-col items-center justify-center section-bg overlay-warm-dark min-h-[100dvh] overflow-y-auto" style="background-image: url('{{ asset('images/hero/cover-bg.jpg') }}')">
     {{-- Particles --}}
     <div class="particle-container" id="coverParticles"></div>
 
     {{-- Top: Bismillah --}}
-    <div class="absolute top-10 md:top-16 left-0 right-0 z-10 text-center">
+    <div class="relative z-10 text-center shrink-0 mt-12 md:mt-16 mb-auto">
         <p class="font-serif text-2xl md:text-4xl text-champagne/30 font-normal tracking-widest italic">
             {{ $wedding->quotes['bismillah'] ?? 'بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ' }}
         </p>
     </div>
 
     {{-- Center: Glass card --}}
-    <div class="relative z-10 text-center px-6 w-full max-w-md">
-        <div class="glass-rose rounded-3xl py-12 px-8 md:py-16 md:px-12">
-            <p class="text-rose-base/50 font-sans text-[9px] tracking-[0.6em] uppercase mb-10">Wedding Invitation</p>
-            <h1 class="font-serif text-4xl md:text-6xl text-white font-normal mb-2 leading-tight text-shadow-lg">
+    <div class="relative z-10 text-center px-6 w-full max-w-md shrink-0 py-8">
+        <div class="glass-rose rounded-3xl py-10 px-6 md:py-14 md:px-10">
+            <p class="text-rose-base/50 font-sans text-[9px] tracking-[0.6em] uppercase mb-8 md:mb-10">Wedding Invitation</p>
+            <h1 class="font-serif text-4xl md:text-5xl text-white font-normal mb-2 leading-tight text-shadow-lg">
                 {{ $wedding->couple['groomName'] ?? '' }}
             </h1>
-            <span class="block font-script text-4xl md:text-5xl text-rose-base/60 my-4">&</span>
-            <h1 class="font-serif text-4xl md:text-6xl text-white font-normal mb-6 leading-tight text-shadow-lg">
+            <span class="block font-script text-3xl md:text-4xl text-rose-base/60 my-3 md:my-4">&</span>
+            <h1 class="font-serif text-4xl md:text-5xl text-white font-normal mb-6 leading-tight text-shadow-lg">
                 {{ $wedding->couple['brideName'] ?? '' }}
             </h1>
-            <div class="divider-ornament my-8">
+            <div class="divider-ornament my-6 md:my-8">
                 <div class="divider-ornament-icon"></div>
             </div>
-            <p class="text-champagne/60 font-sans text-sm tracking-[0.3em] uppercase">{{ $wedding->wedding_info['dateFormatted'] ?? '' }}</p>
+            <p class="text-champagne/60 font-sans text-xs md:text-sm tracking-[0.3em] uppercase">{{ $wedding->wedding_info['dateFormatted'] ?? '' }}</p>
         </div>
     </div>
 
     {{-- Bottom: Guest + Button --}}
-    <div class="absolute bottom-10 md:bottom-14 left-0 right-0 z-10 text-center px-6">
-        <p class="text-champagne/40 text-xs mb-6">
+    <div class="relative z-10 text-center px-6 shrink-0 mt-auto mb-12 md:mb-16">
+        <p class="text-champagne/40 text-xs mb-4 md:mb-6">
             Kepada Yth. <span class="text-champagne/80 font-medium" id="guestName">{{ $guestName }}</span>
         </p>
-        <button id="openInvitationBtn" onclick="openInvitation()" class="ghost-btn px-12 py-3.5">
+        <button id="openInvitationBtn" onclick="openInvitation()" class="ghost-btn px-10 md:px-12 py-3 md:py-3.5">
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
             Buka Undangan
         </button>
