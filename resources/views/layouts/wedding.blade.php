@@ -7,6 +7,13 @@
     <title>{{ $wedding->couple['groomShort'] ?? '' }} & {{ $wedding->couple['brideShort'] ?? '' }} - Wedding Invitation</title>
     <meta name="description" content="Undangan Pernikahan {{ $wedding->couple['groomName'] ?? '' }} & {{ $wedding->couple['brideName'] ?? '' }}">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+    <script>
+        // Mencegah browser mengingat posisi scroll saat di-refresh
+        if ('scrollRestoration' in history) {
+            history.scrollRestoration = 'manual';
+        }
+        window.scrollTo(0, 0);
+    </script>
 </head>
 <body class="wedding-theme bg-warm-dark text-white font-sans overflow-x-hidden antialiased">
 
