@@ -7,35 +7,35 @@
     @include('wedding.partials.couple')
     @include('wedding.partials.countdown')
 
-    @if($wedding->sections['story']['enabled'] ?? true)
+    @if(filter_var($wedding->sections['story']['enabled'] ?? true, FILTER_VALIDATE_BOOLEAN))
         @include('wedding.partials.story')
     @endif
 
-    @if($wedding->sections['event']['enabled'] ?? true)
+    @if(filter_var($wedding->sections['event']['enabled'] ?? true, FILTER_VALIDATE_BOOLEAN))
         @include('wedding.partials.event')
     @endif
 
-    @if($wedding->sections['gallery']['enabled'] ?? true)
+    @if(filter_var($wedding->sections['gallery']['enabled'] ?? true, FILTER_VALIDATE_BOOLEAN))
         @include('wedding.partials.gallery')
     @endif
 
-    @if($wedding->sections['video']['enabled'] ?? true)
+    @if(filter_var($wedding->sections['video']['enabled'] ?? true, FILTER_VALIDATE_BOOLEAN))
         @include('wedding.partials.video')
     @endif
 
-    @if($wedding->sections['location']['enabled'] ?? true)
+    @if(filter_var($wedding->sections['location']['enabled'] ?? true, FILTER_VALIDATE_BOOLEAN))
         @include('wedding.partials.location')
     @endif
 
-    @if($wedding->sections['rsvp']['enabled'] ?? true)
+    @if(filter_var($wedding->sections['rsvp']['enabled'] ?? true, FILTER_VALIDATE_BOOLEAN))
         @include('wedding.partials.rsvp')
     @endif
 
-    @if($wedding->sections['gift']['enabled'] ?? true)
+    @if(filter_var($wedding->sections['gift']['enabled'] ?? true, FILTER_VALIDATE_BOOLEAN))
         @include('wedding.partials.gift')
     @endif
 
-    @if($wedding->sections['wish']['enabled'] ?? true)
+    @if(filter_var($wedding->sections['wish']['enabled'] ?? true, FILTER_VALIDATE_BOOLEAN))
         @include('wedding.partials.wish')
     @endif
 
