@@ -45,7 +45,7 @@
 </div>
 
 <audio id="bgMusic" loop preload="auto">
-    <source src="{{ asset('audio/wedding.mp3') }}" type="audio/mpeg">
+    <source src="{{ asset('audio/wedding.mp3') }}?v={{ file_exists(public_path('audio/wedding.mp3')) ? filemtime(public_path('audio/wedding.mp3')) : time() }}" type="audio/mpeg">
 </audio>
 
 <button id="musicControl" class="fixed bottom-6 right-6 z-40 w-11 h-11 glass rounded-full items-center justify-center hidden text-white shadow-lg hover:scale-110 transition-all duration-300" title="Music">
