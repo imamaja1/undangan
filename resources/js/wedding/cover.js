@@ -1,5 +1,3 @@
-import dayjs from 'dayjs';
-
 function createParticles(containerId, count) {
     const container = document.getElementById(containerId);
     if (!container) return;
@@ -29,25 +27,21 @@ window.openInvitation = function() {
     }
     
     const audio = document.getElementById('bgMusic');
-    if (audio) {
-        audio.play().catch(() => {});
-    }
+    if (audio) { audio.play().catch(() => {}); }
     
     const musicBtn = document.getElementById('musicControl');
-    if (musicBtn) {
-        musicBtn.style.display = 'flex';
-    }
+    if (musicBtn) { musicBtn.style.display = 'flex'; }
 };
 
 document.addEventListener('DOMContentLoaded', () => {
     document.body.classList.add('overflow-hidden');
 
-    createParticles('coverParticles', 25);
-    createParticles('openingParticles', 15);
-    createParticles('coupleParticles', 15);
-    createParticles('countdownParticles', 20);
-    createParticles('rsvpParticles', 15);
-    createParticles('footerParticles', 15);
+    createParticles('coverParticles', 20);
+    createParticles('openingParticles', 12);
+    createParticles('coupleParticles', 12);
+    createParticles('countdownParticles', 15);
+    createParticles('rsvpParticles', 12);
+    createParticles('footerParticles', 12);
 
     const musicBtn = document.getElementById('musicControl');
     const audio = document.getElementById('bgMusic');
@@ -65,8 +59,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     
     document.addEventListener('visibilitychange', () => {
-        if (audio && document.hidden) {
-            audio.pause();
-        }
+        if (audio && document.hidden) { audio.pause(); }
     });
 });

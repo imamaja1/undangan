@@ -4,7 +4,7 @@
 
     {{-- Top: Bismillah --}}
     <div class="absolute top-10 md:top-16 left-0 right-0 z-10 text-center">
-        <p class="font-serif text-2xl md:text-4xl text-champagne/30 font-light tracking-widest italic">
+        <p class="font-serif text-2xl md:text-4xl text-champagne/30 font-normal tracking-widest italic">
             {{ $wedding->quotes['bismillah'] ?? 'بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ' }}
         </p>
     </div>
@@ -13,11 +13,11 @@
     <div class="relative z-10 text-center px-6 w-full max-w-md">
         <div class="glass-rose rounded-3xl py-12 px-8 md:py-16 md:px-12">
             <p class="text-rose-base/50 font-sans text-[9px] tracking-[0.6em] uppercase mb-10">Wedding Invitation</p>
-            <h1 class="font-serif text-4xl md:text-6xl text-white font-light mb-2 leading-tight text-shadow-lg">
+            <h1 class="font-serif text-4xl md:text-6xl text-white font-normal mb-2 leading-tight text-shadow-lg">
                 {{ $wedding->couple['groomName'] ?? '' }}
             </h1>
             <span class="block font-script text-4xl md:text-5xl text-rose-base/60 my-4">&</span>
-            <h1 class="font-serif text-4xl md:text-6xl text-white font-light mb-6 leading-tight text-shadow-lg">
+            <h1 class="font-serif text-4xl md:text-6xl text-white font-normal mb-6 leading-tight text-shadow-lg">
                 {{ $wedding->couple['brideName'] ?? '' }}
             </h1>
             <div class="divider-ornament my-8">
@@ -39,7 +39,7 @@
     </div>
 
     {{-- Scroll indicator --}}
-    <div class="absolute bottom-4 left-1/2 -translate-x-1/2 z-10">
+    <div class="absolute bottom-2 left-1/2 -translate-x-1/2 z-10 hidden" id="scrollHint">
         <svg class="scroll-indicator w-4 h-4 text-rose-base/30" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 14l-7 7m0 0l-7-7m7 7V3"/></svg>
     </div>
 </div>

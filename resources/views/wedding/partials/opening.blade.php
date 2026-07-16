@@ -9,7 +9,7 @@
                 {{ $wedding->quotes['opening'] ?? 'Assalamu\'alaikum Wr. Wb.' }}
             </p>
             <div class="w-12 h-px bg-rose-base/20 mx-auto my-6"></div>
-            <p class="font-sans text-sm text-champagne/70 font-light leading-relaxed">
+            <p class="font-sans text-sm text-champagne/70 font-normal leading-relaxed">
                 {{ $wedding->quotes['openingText'] ?? '' }}
             </p>
             <div class="divider-ornament mt-8">

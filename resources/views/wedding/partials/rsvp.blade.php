@@ -3,7 +3,7 @@
     <div class="particle-container" id="rsvpParticles"></div>
     <div class="relative z-10 max-w-lg mx-auto px-6">
         <p class="text-center text-rose-base/40 font-sans text-[10px] tracking-[0.5em] uppercase mb-3" data-reveal="fade">Konfirmasi</p>
-        <h2 class="font-serif text-3xl md:text-5xl text-white font-light tracking-wide text-center text-shadow mb-4" data-reveal="fade" data-reveal-delay="100">RSVP</h2>
+        <h2 class="font-serif text-3xl md:text-5xl text-white font-normal tracking-wide text-center text-shadow mb-4" data-reveal="fade" data-reveal-delay="100">RSVP</h2>
         <div class="divider-ornament mb-16" data-reveal="fade" data-reveal-delay="200">
             <div class="divider-ornament-icon"></div>
         </div>

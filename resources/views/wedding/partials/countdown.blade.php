@@ -3,7 +3,7 @@
     <div class="particle-container" id="countdownParticles"></div>
     <div class="relative z-10 max-w-xl mx-auto px-6 text-center">
         <p class="text-rose-base/40 font-sans text-[10px] tracking-[0.4em] uppercase mb-3" data-reveal="fade">Save The Date</p>
-        <h2 class="font-serif text-3xl md:text-5xl text-white font-light tracking-wide text-shadow mb-3" data-reveal="fade" data-reveal-delay="100">{{ $wedding->wedding_info['dateFormatted'] ?? '' }}</h2>
+        <h2 class="font-serif text-3xl md:text-5xl text-white font-normal tracking-wide text-shadow mb-3" data-reveal="fade" data-reveal-delay="100">{{ $wedding->wedding_info['dateFormatted'] ?? '' }}</h2>
         <div class="divider-ornament mb-10" data-reveal="fade" data-reveal-delay="150">
             <div class="divider-ornament-icon"></div>
         </div>

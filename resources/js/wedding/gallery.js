@@ -9,15 +9,14 @@ document.addEventListener('DOMContentLoaded', () => {
     const swiperEl = document.querySelector('.gallerySwiper');
     if (swiperEl) {
         new Swiper('.gallerySwiper', {
-            slidesPerView: 1,
-            spaceBetween: 20,
+            slidesPerView: 1.2,
+            spaceBetween: 16,
             loop: true,
-            autoplay: { delay: 3000, disableOnInteraction: false },
+            autoplay: { delay: 3500, disableOnInteraction: false },
             pagination: { el: '.swiper-pagination', clickable: true },
-            navigation: { nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' },
             breakpoints: {
-                640: { slidesPerView: 2 },
-                1024: { slidesPerView: 3 }
+                640: { slidesPerView: 2, spaceBetween: 20 },
+                1024: { slidesPerView: 3, spaceBetween: 24 }
             }
         });
     }
