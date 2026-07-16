@@ -6,6 +6,15 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Admin — {{ config('app.name', 'SuratUndangan') }}</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+    <style>
+        button, 
+        [type="button"], 
+        [type="submit"], 
+        [role="button"],
+        .cursor-pointer {
+            cursor: pointer !important;
+        }
+    </style>
 </head>
 <body class="h-full bg-gray-50">
     <div class="flex h-screen overflow-hidden">
