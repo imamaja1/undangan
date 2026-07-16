@@ -1,4 +1,4 @@
-<section id="hero" class="min-h-[100dvh] flex items-center justify-center section-bg overlay-warm" style="background-image: url('{{ asset('images/hero/hero-bg.jpg') }}')">
+<section id="hero" class="min-h-[100dvh] flex items-center justify-center section-bg overlay-warm" style="background-image: url('{{ asset('images/hero/hero-bg.jpg') }}?v={{ @filemtime(public_path('images/hero/hero-bg.jpg')) }}')">
     {{-- Decorative corners --}}
     <div class="corner-ornament corner-tl"></div>
     <div class="corner-ornament corner-tr"></div>

@@ -1,4 +1,4 @@
-<section id="rsvp" class="py-20 md:py-32 section-bg overlay-warm-dark section-fade-top" style="background-image: url('{{ asset('images/hero/rsvp-bg.jpg') }}')">
+<section id="rsvp" class="py-20 md:py-32 section-bg overlay-warm-dark section-fade-top" style="background-image: url('{{ asset('images/hero/rsvp-bg.jpg') }}?v={{ @filemtime(public_path('images/hero/rsvp-bg.jpg')) }}')">
     <input type="hidden" id="waNumber" value="{{ $wedding->wa_number ?? '' }}">
     <div class="particle-container" id="rsvpParticles"></div>
     <div class="relative z-10 max-w-lg mx-auto px-6">

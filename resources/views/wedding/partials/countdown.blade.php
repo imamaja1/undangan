@@ -1,4 +1,4 @@
-<section id="countdown" class="py-20 md:py-32 section-bg overlay-warm-dark section-fade-top" style="background-image: url('{{ asset('images/hero/countdown-bg.jpg') }}')">
+<section id="countdown" class="py-20 md:py-32 section-bg overlay-warm-dark section-fade-top" style="background-image: url('{{ asset('images/hero/countdown-bg.jpg') }}?v={{ @filemtime(public_path('images/hero/countdown-bg.jpg')) }}')">
     <input type="hidden" id="countdownTarget" value="{{ $wedding->wedding_info['date'] ?? '' }}">
     <div class="particle-container" id="countdownParticles"></div>
     <div class="relative z-10 max-w-xl mx-auto px-6 text-center">
