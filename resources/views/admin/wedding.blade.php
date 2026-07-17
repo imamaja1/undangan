@@ -125,18 +125,18 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 function setVal(path, value) {
-    const el = document.querySelector(`[name="${path}"]`);
-    if (!el) return;
-    if (el.type === 'checkbox') {
-        el.checked = value === true || value === 'true';
-        if (el.previousElementSibling && el.previousElementSibling.type === 'hidden') {
-            el.previousElementSibling.value = el.checked ? 'true' : 'false';
+    const elements = document.querySelectorAll(`[name="${path}"]`);
+    elements.forEach(el => {
+        if (el.type === 'checkbox') {
+            el.checked = value === true || value === 'true';
+        } else if (el.type === 'hidden') {
+            el.value = (value === true || value === 'true') ? 'true' : 'false';
+        } else if (el.type === 'datetime-local' && value) {
+            el.value = value.substring(0, 16);
+        } else if (el.tagName === 'TEXTAREA' || el.tagName === 'INPUT') {
+            el.value = value || '';
         }
-    } else if (el.type === 'datetime-local' && value) {
-        el.value = value.substring(0, 16);
-    } else if (el.tagName === 'TEXTAREA' || el.tagName === 'INPUT') {
-        el.value = value || '';
-    }
+    });
 }
 
 function populateForm(data) {
