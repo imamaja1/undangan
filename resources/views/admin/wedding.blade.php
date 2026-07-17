@@ -18,6 +18,11 @@
                 <fieldset class="border border-gray-200 rounded-lg p-4">
                     <legend class="text-sm font-medium text-gray-700 px-2">Mempelai Pria</legend>
                     <div class="space-y-3">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Foto Mempelai Pria</label>
+                            <input type="file" name="groom_photo" accept="image/*" class="w-full px-3 py-2 rounded-lg border border-gray-300 text-sm shadow-sm focus:ring-2 focus:ring-gray-900/10 focus:border-gray-900 outline-none transition">
+                            <p class="text-xs text-gray-500 mt-1">Biarkan kosong jika tidak ingin mengubah foto saat ini.</p>
+                        </div>
                         <div><label class="block text-sm font-medium text-gray-700 mb-1">Nama Lengkap</label><input type="text" name="couple[groomName]" class="w-full px-3 py-2 rounded-lg border border-gray-300 text-sm shadow-sm focus:ring-2 focus:ring-gray-900/10 focus:border-gray-900 outline-none transition"></div>
                         <div><label class="block text-sm font-medium text-gray-700 mb-1">Nama Panggilan</label><input type="text" name="couple[groomShort]" class="w-full px-3 py-2 rounded-lg border border-gray-300 text-sm shadow-sm focus:ring-2 focus:ring-gray-900/10 focus:border-gray-900 outline-none transition"></div>
                         <div><label class="block text-sm font-medium text-gray-700 mb-1">Orang Tua</label><input type="text" name="couple[groomParents]" class="w-full px-3 py-2 rounded-lg border border-gray-300 text-sm shadow-sm focus:ring-2 focus:ring-gray-900/10 focus:border-gray-900 outline-none transition"></div>
@@ -28,6 +33,11 @@
                 <fieldset class="border border-gray-200 rounded-lg p-4">
                     <legend class="text-sm font-medium text-gray-700 px-2">Mempelai Wanita</legend>
                     <div class="space-y-3">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Foto Mempelai Wanita</label>
+                            <input type="file" name="bride_photo" accept="image/*" class="w-full px-3 py-2 rounded-lg border border-gray-300 text-sm shadow-sm focus:ring-2 focus:ring-gray-900/10 focus:border-gray-900 outline-none transition">
+                            <p class="text-xs text-gray-500 mt-1">Biarkan kosong jika tidak ingin mengubah foto saat ini.</p>
+                        </div>
                         <div><label class="block text-sm font-medium text-gray-700 mb-1">Nama Lengkap</label><input type="text" name="couple[brideName]" class="w-full px-3 py-2 rounded-lg border border-gray-300 text-sm shadow-sm focus:ring-2 focus:ring-gray-900/10 focus:border-gray-900 outline-none transition"></div>
                         <div><label class="block text-sm font-medium text-gray-700 mb-1">Nama Panggilan</label><input type="text" name="couple[brideShort]" class="w-full px-3 py-2 rounded-lg border border-gray-300 text-sm shadow-sm focus:ring-2 focus:ring-gray-900/10 focus:border-gray-900 outline-none transition"></div>
                         <div><label class="block text-sm font-medium text-gray-700 mb-1">Orang Tua</label><input type="text" name="couple[brideParents]" class="w-full px-3 py-2 rounded-lg border border-gray-300 text-sm shadow-sm focus:ring-2 focus:ring-gray-900/10 focus:border-gray-900 outline-none transition"></div>
@@ -155,24 +165,16 @@ function populateForm(data) {
 
 async function saveWeddingConfig() {
     const fd = new FormData(document.getElementById('weddingConfigForm'));
-    const data = {};
-    for (let [key, value] of fd.entries()) {
-        const match = key.match(/(\w+)\[(\w+)\](?:\[(\w+)\])?/);
-        if (!match) { data[key] = value; continue; }
-        const [, parent, child, grandchild] = match;
-        if (!data[parent]) data[parent] = {};
-        if (grandchild) {
-            if (!data[parent][child]) data[parent][child] = {};
-            data[parent][child][grandchild] = value;
-        } else {
-            data[parent][child] = value;
-        }
-    }
+    // Laravel requires _method=PUT/PATCH for updates, but since route is POST, we just send as POST.
+    
     try {
         const res = await fetch('{{ route("admin.wedding.update") }}', {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json', 'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content, 'Accept': 'application/json' },
-            body: JSON.stringify(data)
+            headers: { 
+                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content, 
+                'Accept': 'application/json' 
+            },
+            body: fd
         });
         const result = await res.json();
         if (result.success) showToast(result.message, 'success');

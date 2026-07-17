@@ -5,6 +5,7 @@
         <div class="divider-ornament mb-12" data-reveal="fade" data-reveal-delay="200">
             <div class="divider-ornament-icon"></div>
         </div>
+        <br>
 
         <form id="wishForm" class="glass-rose rounded-2xl p-6 md:p-8 shadow-2xl space-y-4 mb-10" data-url="{{ route('wishes.store') }}" onsubmit="submitWish(event)" data-reveal="up" data-reveal-delay="300">
             @csrf

@@ -5,6 +5,7 @@
             <div class="divider-ornament mb-8">
                 <div class="divider-ornament-icon"></div>
             </div>
+            <br>
             <p class="font-script text-3xl md:text-4xl text-rose-base/70 mb-6 text-shadow">
                 {{ $wedding->quotes['opening'] ?? 'Assalamu\'alaikum Wr. Wb.' }}
             </p>
@@ -15,6 +16,7 @@
             <div class="divider-ornament mt-8">
                 <div class="divider-ornament-icon"></div>
             </div>
+            <br>
         </div>
     </div>
 </section>

@@ -17,6 +17,7 @@
         <div class="divider-ornament my-8" data-reveal="fade" data-reveal-delay="500">
             <div class="divider-ornament-icon"></div>
         </div>
+        <br>
         <p class="text-champagne/50 font-sans text-sm tracking-[0.3em] uppercase" data-reveal="fade" data-reveal-delay="600">{{ $wedding->wedding_info['dateFormatted'] ?? '' }}</p>
         @if($wedding->quotes['quran'] ?? false)
         <div class="mt-12 glass rounded-2xl p-6 shadow-2xl" data-reveal="up" data-reveal-delay="700">

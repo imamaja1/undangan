@@ -7,6 +7,7 @@
         <div class="divider-ornament mb-10" data-reveal="fade" data-reveal-delay="150">
             <div class="divider-ornament-icon"></div>
         </div>
+        <br>
 
         <div class="glass-rose rounded-2xl p-6 md:p-10 shadow-2xl" data-reveal="fadeScale" data-reveal-delay="200">
             <div class="grid grid-cols-4 gap-4 md:gap-8">

@@ -8,6 +8,7 @@
         <div class="divider-ornament mb-8" data-reveal="fade" data-reveal-delay="300">
             <div class="divider-ornament-icon"></div>
         </div>
+        <br>
         <p class="font-serif text-2xl md:text-3xl text-rose-light font-normal text-shadow" data-reveal="fade" data-reveal-delay="400">
             {{ $wedding->couple['groomShort'] ?? '' }} & {{ $wedding->couple['brideShort'] ?? '' }}
         </p>

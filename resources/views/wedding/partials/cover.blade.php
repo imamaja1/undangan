@@ -23,6 +23,7 @@
             <div class="divider-ornament my-6 md:my-8">
                 <div class="divider-ornament-icon"></div>
             </div>
+            <br>
             <p class="text-champagne/60 font-sans text-xs md:text-sm tracking-[0.3em] uppercase">{{ $wedding->wedding_info['dateFormatted'] ?? '' }}</p>
         </div>
     </div>

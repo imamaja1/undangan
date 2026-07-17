@@ -19,6 +19,8 @@ class WeddingRequest extends FormRequest
             'quotes' => 'required|array',
             'wa_number' => 'nullable|string|max:20',
             'sections' => 'required|array',
+            'groom_photo' => 'nullable|image|max:2048',
+            'bride_photo' => 'nullable|image|max:2048',
         ];
     }
 }
