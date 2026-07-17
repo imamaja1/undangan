@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>{{ $wedding->couple['groomShort'] ?? '' }} & {{ $wedding->couple['brideShort'] ?? '' }} - Wedding Invitation</title>
+    <link rel="icon" type="image/svg+xml" href="{{ asset('favicon.svg') }}">
     <meta name="description" content="Undangan Pernikahan {{ $wedding->couple['groomName'] ?? '' }} & {{ $wedding->couple['brideName'] ?? '' }}">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <script>
