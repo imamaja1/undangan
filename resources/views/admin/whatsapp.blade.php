@@ -193,8 +193,13 @@ async function checkStatus() {
             testSect.style.display = 'none';
             btnLogout.classList.add('hidden');
             btnInit.classList.add('hidden');
-            await loadQR();
-            // Poll faster when waiting for scan
+            
+            // Hanya load QR jika belum tampil, agar tidak berkedip terus saat discan
+            if(qrBox.classList.contains('hidden')) {
+                await loadQR();
+            }
+            
+            // Cek status setiap 5 detik (hanya status, tidak me-load ulang QR)
             pollingInterval = setTimeout(checkStatus, 5000);
         }
         else if (state === 'initializing') {
