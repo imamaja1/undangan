@@ -27,7 +27,7 @@ class GuestController extends Controller
     {
         $wedding = Wedding::with('guests')->firstOrFail();
         $guests = $wedding->guests;
-        $template = $wedding->wedding_info['wa_template'] ?? "Kepada Yth. {{nama}},\n\nTanpa mengurangi rasa hormat, kami bermaksud mengundang Bapak/Ibu/Saudara/i untuk hadir di acara pernikahan kami.\n\nSilakan buka tautan undangan berikut untuk detail acara:\n{{link}}\n\nKehadiran Anda adalah kebahagiaan bagi kami.\n\nTerima kasih.";
+        $template = $wedding->wedding_info['wa_template'] ?? "Kepada Yth. {{nama}},\n\nTanpa mengurangi rasa hormat, kami bermaksud mengundang Bapak/Ibu/Saudara/i untuk hadir di acara pernikahan kami.\n\nKehadiran Anda adalah kebahagiaan bagi kami.\n\nTerima kasih.\n\nSilakan buka tautan undangan berikut untuk detail acara:\n{{link}}";
 
         return view('admin.guests', compact('guests', 'template'));
     }
@@ -125,7 +125,7 @@ class GuestController extends Controller
         }
 
         $wedding = Wedding::firstOrFail();
-        $template = $wedding->wedding_info['wa_template'] ?? "Kepada Yth. {{nama}},\nSilakan buka undangan: {{link}}";
+        $template = $wedding->wedding_info['wa_template'] ?? "Kepada Yth. {{nama}},\n\nTanpa mengurangi rasa hormat, kami bermaksud mengundang Bapak/Ibu/Saudara/i untuk hadir di acara pernikahan kami.\n\nKehadiran Anda adalah kebahagiaan bagi kami.\n\nTerima kasih.\n\nSilakan buka tautan undangan berikut untuk detail acara:\n{{link}}";
         
         // Generate personalized message
         $link = route('wedding.index') . '?to=' . urlencode($guest->name);

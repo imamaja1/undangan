@@ -237,7 +237,12 @@ async function sendWa(id) {
         const data = await res.json();
         if(res.ok && data.success) {
             showToast('Terkirim!', 'success');
-            setTimeout(() => location.reload(), 500);
+            btn.textContent = 'OK';
+            const span = document.querySelector(`#row-${id} td:nth-child(4) span`);
+            if (span) {
+                span.className = 'px-2 py-1 bg-emerald-100 text-emerald-700 text-xs font-medium rounded-md';
+                span.textContent = 'Terkirim';
+            }
         } else {
             showToast(data.error || 'Gagal', 'error');
             btn.textContent = 'Gagal';
