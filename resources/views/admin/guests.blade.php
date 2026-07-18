@@ -237,7 +237,8 @@ async function sendWa(id) {
         const data = await res.json();
         if(res.ok && data.success) {
             showToast('Terkirim!', 'success');
-            btn.textContent = 'OK';
+            btn.textContent = 'Kirim';
+            btn.disabled = false;
             const span = document.querySelector(`#row-${id} td:nth-child(4) span`);
             if (span) {
                 span.className = 'px-2 py-1 bg-emerald-100 text-emerald-700 text-xs font-medium rounded-md';
@@ -287,8 +288,9 @@ async function blastAll() {
                 });
                 const data = await res.json();
                 if(res.ok && data.success) {
-                    btn.textContent = 'OK';
-                    btn.className = 'text-emerald-600 font-medium text-xs px-2 py-1 rounded';
+                    btn.textContent = 'Kirim';
+                    btn.className = 'text-emerald-600 hover:text-emerald-800 font-medium text-xs px-2 py-1 rounded hover:bg-emerald-50 transition-colors';
+                    btn.disabled = false;
                     const span = document.querySelector(`#row-${id} td:nth-child(4) span`);
                     span.className = 'px-2 py-1 bg-emerald-100 text-emerald-700 text-xs font-medium rounded-md';
                     span.textContent = 'Terkirim';
