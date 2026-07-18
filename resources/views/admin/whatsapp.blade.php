@@ -81,6 +81,7 @@
                     {{-- Action Buttons --}}
                     <div class="flex gap-2 mt-4">
                         <button id="btnRefreshStatus" onclick="checkStatus()" class="px-3 py-1.5 bg-gray-100 hover:bg-gray-200 text-gray-700 text-xs font-medium rounded-lg transition-colors border border-gray-200">Refresh Status</button>
+                        <button id="btnInit" onclick="forceInit()" class="hidden px-3 py-1.5 bg-blue-50 hover:bg-blue-100 text-blue-600 text-xs font-medium rounded-lg transition-colors border border-blue-200">Minta QR Baru</button>
                         <button id="btnLogoutWa" onclick="logoutWa()" class="hidden px-3 py-1.5 bg-red-50 hover:bg-red-100 text-red-500 text-xs font-medium rounded-lg transition-colors border border-red-200">Logout Sesi</button>
                     </div>
                 </div>
@@ -159,7 +160,7 @@ async function checkStatus() {
     const qrText = document.getElementById('qrStatusText');
     const qrBox = document.getElementById('qrImageBox');
     const btnLogout = document.getElementById('btnLogoutWa');
-    const testSect = document.getElementById('testMessageSection');
+    const btnInit = document.getElementById('btnInit');
     
     try {
         const res = await fetch('{{ route("admin.whatsapp.status") }}');
@@ -171,6 +172,7 @@ async function checkStatus() {
             qrText.textContent = 'Silakan masukkan API Key terlebih dahulu.';
             qrBox.classList.add('hidden');
             testSect.style.display = 'none';
+            btnInit.classList.add('hidden');
             return;
         }
 
@@ -181,6 +183,7 @@ async function checkStatus() {
             qrText.innerHTML = '<span class="text-emerald-500 font-medium">WhatsApp siap digunakan!</span><br><span class="text-xs text-gray-400">Pesan akan langsung terkirim.</span>';
             qrBox.classList.add('hidden');
             btnLogout.classList.remove('hidden');
+            btnInit.classList.add('hidden');
             testSect.style.display = 'block';
         } 
         else if (state === 'awaiting_scan') {
@@ -188,6 +191,7 @@ async function checkStatus() {
             qrText.innerHTML = 'Scan QR di bawah ini dengan aplikasi WhatsApp Anda:<br><span class="text-xs text-gray-400">Setelan > Perangkat Tertaut > Tautkan Perangkat</span>';
             testSect.style.display = 'none';
             btnLogout.classList.add('hidden');
+            btnInit.classList.add('hidden');
             await loadQR();
             // Poll faster when waiting for scan
             pollingInterval = setTimeout(checkStatus, 5000);
@@ -198,19 +202,29 @@ async function checkStatus() {
             qrBox.classList.add('hidden');
             testSect.style.display = 'none';
             btnLogout.classList.add('hidden');
+            btnInit.classList.add('hidden');
             pollingInterval = setTimeout(checkStatus, 3000);
         }
         else {
             updateUI(badge, 'TERPUTUS', 'bg-red-100 text-red-600');
-            qrText.innerHTML = `<span class="text-red-500">Koneksi Terputus (${state}).</span><br><span class="text-xs text-gray-500">Restart server gateway Anda bila perlu.</span>`;
+            qrText.innerHTML = `<span class="text-red-500">Koneksi Terputus (${state}).</span><br><span class="text-xs text-gray-500">Silakan klik "Minta QR Baru" untuk memulai sesi baru.</span>`;
             qrBox.classList.add('hidden');
             testSect.style.display = 'none';
+            btnInit.classList.remove('hidden');
             if(state !== 'logged_out') btnLogout.classList.remove('hidden');
         }
     } catch(err) {
         updateUI(badge, 'GAGAL KONEKSI', 'bg-red-100 text-red-600');
         qrText.textContent = 'Tidak dapat terhubung ke server proxy Laravel.';
+        btnInit.classList.add('hidden');
     }
+}
+
+async function forceInit() {
+    showToast('Meminta sesi baru...', 'success');
+    document.getElementById('btnInit').classList.add('hidden');
+    await loadQR();
+    setTimeout(checkStatus, 2000);
 }
 
 function updateUI(badge, text, classes) {
