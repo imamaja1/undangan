@@ -1,4 +1,4 @@
-<section id="opening" class="min-h-screen flex items-center justify-center section-bg overlay-warm" style="background-image: url('{{ asset('images/hero/opening-bg.jpg') }}?v={{ file_exists(public_path('images/hero/opening-bg.jpg')) ? filemtime(public_path('images/hero/opening-bg.jpg')) : time() }}')">
+<section id="opening" class="min-h-screen flex items-center justify-center section-bg overlay-warm" style="background-image: url('{{ asset('images/hero/opening-bg.jpg') }}?v={{ $wedding->updated_at->timestamp ?? time() }}')">
     <div class="particle-container" id="openingParticles"></div>
     <div class="relative z-10 w-full max-w-lg mx-auto px-6 text-center py-16">
         <div class="glass-rose rounded-3xl p-8 md:p-14 shadow-2xl" data-reveal="fadeScale">

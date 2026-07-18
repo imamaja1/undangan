@@ -1,4 +1,4 @@
-<section id="hero" class="min-h-[100dvh] flex items-center justify-center section-bg overlay-warm" style="background-image: url('{{ asset('images/hero/hero-bg.jpg') }}?v={{ file_exists(public_path('images/hero/hero-bg.jpg')) ? filemtime(public_path('images/hero/hero-bg.jpg')) : time() }}')">
+<section id="hero" class="min-h-[100dvh] flex items-center justify-center section-bg overlay-warm" style="background-image: url('{{ asset('images/hero/hero-bg.jpg') }}?v={{ $wedding->updated_at->timestamp ?? time() }}')">
     {{-- Decorative corners --}}
     <div class="corner-ornament corner-tl"></div>
     <div class="corner-ornament corner-tr"></div>

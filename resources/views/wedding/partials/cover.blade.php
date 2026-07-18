@@ -1,4 +1,4 @@
-<div id="coverSection" class="fixed inset-0 z-50 flex flex-col items-center justify-center section-bg overlay-warm-dark min-h-[100dvh] overflow-y-auto" style="background-image: url('{{ asset('images/hero/cover-bg.jpg') }}?v={{ file_exists(public_path('images/hero/cover-bg.jpg')) ? filemtime(public_path('images/hero/cover-bg.jpg')) : time() }}')">
+<div id="coverSection" class="fixed inset-0 z-50 flex flex-col items-center justify-center section-bg overlay-warm-dark min-h-[100dvh] overflow-y-auto" style="background-image: url('{{ asset('images/hero/cover-bg.jpg') }}?v={{ $wedding->updated_at->timestamp ?? time() }}')">
     {{-- Particles --}}
     <div class="particle-container" id="coverParticles"></div>
 
@@ -46,7 +46,7 @@
 </div>
 
 <audio id="bgMusic" loop preload="auto">
-    <source src="{{ asset('audio/wedding.mp3') }}?v={{ file_exists(public_path('audio/wedding.mp3')) ? filemtime(public_path('audio/wedding.mp3')) : time() }}" type="audio/mpeg">
+    <source src="{{ asset('audio/wedding.mp3') }}?v={{ $wedding->updated_at->timestamp ?? time() }}" type="audio/mpeg">
 </audio>
 
 <button id="musicControl" class="fixed bottom-6 right-6 z-40 w-11 h-11 glass rounded-full items-center justify-center hidden text-white shadow-lg hover:scale-110 transition-all duration-300" title="Music">

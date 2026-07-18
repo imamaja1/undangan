@@ -9,6 +9,8 @@ use App\Http\Controllers\Admin\StoryController;
 use App\Http\Controllers\Admin\WeddingController;
 use App\Http\Controllers\Admin\WishController as AdminWishController;
 use App\Http\Controllers\Admin\UploadController;
+use App\Http\Controllers\Admin\WhatsappController;
+use App\Http\Controllers\Admin\GuestController;
 use App\Http\Controllers\Guest\WishController;
 use App\Http\Controllers\WeddingPageController;
 use Illuminate\Support\Facades\Route;
@@ -55,6 +57,24 @@ Route::middleware('auth')->prefix('admin')->name('admin.')->group(function () {
     // Image upload + list
     Route::post('/upload', [UploadController::class, 'upload'])->name('upload');
     Route::get('/images', [UploadController::class, 'images'])->name('images');
+
+    // Otomasi WA
+    Route::get('/whatsapp', [WhatsappController::class, 'index'])->name('whatsapp.index');
+    Route::post('/whatsapp/key', [WhatsappController::class, 'saveKey'])->name('whatsapp.saveKey');
+    Route::post('/whatsapp/generate-key', [WhatsappController::class, 'generateKey'])->name('whatsapp.generateKey');
+    Route::get('/whatsapp/status', [WhatsappController::class, 'status'])->name('whatsapp.status');
+    Route::get('/whatsapp/qr', [WhatsappController::class, 'qr'])->name('whatsapp.qr');
+    Route::post('/whatsapp/send', [WhatsappController::class, 'send'])->name('whatsapp.send');
+    Route::post('/whatsapp/logout', [WhatsappController::class, 'logout'])->name('whatsapp.logout');
+
+    // Buku Tamu
+    Route::get('/guests', [GuestController::class, 'index'])->name('guests.index');
+    Route::post('/guests', [GuestController::class, 'store'])->name('guests.store');
+    Route::put('/guests/{guest}', [GuestController::class, 'update'])->name('guests.update');
+    Route::delete('/guests/{guest}', [GuestController::class, 'destroy'])->name('guests.destroy');
+    Route::post('/guests/bulk-paste', [GuestController::class, 'bulkPaste'])->name('guests.bulkPaste');
+    Route::post('/guests/template', [GuestController::class, 'saveTemplate'])->name('guests.saveTemplate');
+    Route::post('/guests/{guest}/send-wa', [GuestController::class, 'sendWa'])->name('guests.sendWa');
 
     // Asset (background & audio)
     Route::get('/assets', [AssetController::class, 'index'])->name('assets.index');

@@ -44,4 +44,9 @@ class Wedding extends Model
     {
         return $this->hasMany(Wish::class)->latest();
     }
+
+    public function guests()
+    {
+        return $this->hasMany(Guest::class)->orderBy('id', 'desc');
+    }
 }

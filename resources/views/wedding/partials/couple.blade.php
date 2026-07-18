@@ -1,7 +1,7 @@
-<section id="couple" class="py-20 md:py-32 section-bg overlay-warm" style="background-image: url('{{ asset('images/hero/couple-bg.jpg') }}?v={{ file_exists(public_path('images/hero/couple-bg.jpg')) ? filemtime(public_path('images/hero/couple-bg.jpg')) : time() }}')">
+<section id="couple" class="py-20 md:py-32 section-bg overlay-warm" style="background-image: url('{{ asset('images/hero/couple-bg.jpg') }}?v={{ $wedding->updated_at->timestamp ?? time() }}')">
 @php
-    $groomPhoto = !empty($wedding->couple['groomPhoto']) ? asset('storage/' . $wedding->couple['groomPhoto']) : asset('images/groom/groom.jpg') . '?v=' . (file_exists(public_path('images/groom/groom.jpg')) ? filemtime(public_path('images/groom/groom.jpg')) : time());
-    $bridePhoto = !empty($wedding->couple['bridePhoto']) ? asset('storage/' . $wedding->couple['bridePhoto']) : asset('images/bride/bride.jpg') . '?v=' . (file_exists(public_path('images/bride/bride.jpg')) ? filemtime(public_path('images/bride/bride.jpg')) : time());
+    $groomPhoto = !empty($wedding->couple['groomPhoto']) ? asset('storage/' . $wedding->couple['groomPhoto']) : asset('images/groom/groom.jpg') . '?v=' . ($wedding->updated_at->timestamp ?? time());
+    $bridePhoto = !empty($wedding->couple['bridePhoto']) ? asset('storage/' . $wedding->couple['bridePhoto']) : asset('images/bride/bride.jpg') . '?v=' . ($wedding->updated_at->timestamp ?? time());
 @endphp
     <div class="particle-container" id="coupleParticles"></div>
     <div class="relative z-10 max-w-4xl mx-auto px-6">
