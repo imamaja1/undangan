@@ -129,7 +129,9 @@ class GuestController extends Controller
         
         // Generate personalized message
         $link = route('wedding.index') . '?to=' . urlencode($guest->name);
-        $message = str_replace(['{{nama}}', '{{link}}'], [$guest->name, $link], $template);
+        
+        $message = preg_replace('/\{\{\s*nama\s*\}\}/i', $guest->name, $template);
+        $message = preg_replace('/\{\{\s*link\s*\}\}/i', $link, $message);
 
         try {
             $response = Http::withoutVerifying()->withHeaders(['x-api-key' => $apiKey])
