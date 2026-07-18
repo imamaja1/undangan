@@ -45,7 +45,7 @@ class WhatsappController extends Controller
         try {
             // 1. Register Application
             $registerResponse = Http::withoutVerifying()->timeout(10)->post("{$this->baseUrl}/api/v1/auth/register", [
-                'name' => config('app.name', 'SuratUndangan') . ' WA Gateway',
+                'name' => config('app.name', 'SuratUndangan') . ' WA Gateway ' . uniqid(),
                 'description' => 'Automated registration from admin panel'
             ]);
 
