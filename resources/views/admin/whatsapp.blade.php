@@ -161,6 +161,7 @@ async function checkStatus() {
     const qrBox = document.getElementById('qrImageBox');
     const btnLogout = document.getElementById('btnLogoutWa');
     const btnInit = document.getElementById('btnInit');
+    const testSect = document.getElementById('testMessageSection');
     
     try {
         const res = await fetch('{{ route("admin.whatsapp.status") }}');
