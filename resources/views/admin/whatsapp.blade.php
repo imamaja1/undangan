@@ -28,19 +28,7 @@
             </div>
             @else
             <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
-                <h2 class="text-sm font-semibold text-gray-600 uppercase tracking-wider mb-4">Konfigurasi API Key</h2>
-                <form id="waConfigForm" onsubmit="saveApiKey(event)" class="space-y-4">
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-1">API Key (x-api-key)</label>
-                        <input type="password" id="waApiKey" name="wa_api_key" value="{{ $apiKey }}" class="w-full px-3 py-2 rounded-lg border border-gray-300 text-sm shadow-sm focus:ring-2 focus:ring-gray-900/10 focus:border-gray-900 outline-none transition" placeholder="ak_..." required>
-                        <p class="text-xs text-gray-400 mt-1">Jika belum punya, Anda bisa generate baru menggunakan form di bawah.</p>
-                    </div>
-                    <button type="submit" class="px-4 py-2 bg-gray-900 hover:bg-gray-800 text-white text-sm font-medium rounded-lg transition-colors shadow-sm">Simpan Kunci Manual</button>
-                </form>
-
-                <hr class="my-6 border-gray-100">
-
-                <h3 class="text-sm font-semibold text-gray-600 uppercase tracking-wider mb-4">Generate API Key Baru</h3>
+                <h3 class="text-sm font-semibold text-gray-600 uppercase tracking-wider mb-4">Integrasi WhatsApp Gateway</h3>
                 <form id="waGenerateForm" onsubmit="generateApiKey(event)" class="space-y-4">
                     <p class="text-xs text-gray-500 mb-2">Klik tombol di bawah ini, dan sistem akan otomatis mendaftarkan aplikasi Anda ke server Otomasi dan menanamkan kuncinya.</p>
                     <button type="submit" id="btnGenerate" class="w-full px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium rounded-lg transition-colors shadow-sm">Daftar & Generate Kunci Otomatis</button>
@@ -99,32 +87,7 @@ document.addEventListener('DOMContentLoaded', () => {
     checkStatus();
 });
 
-async function saveApiKey(e) {
-    e.preventDefault();
-    const btn = e.target.querySelector('button');
-    const oriText = btn.textContent;
-    btn.textContent = 'Menyimpan...';
-    btn.disabled = true;
-
-    try {
-        const res = await fetch('{{ route("admin.whatsapp.saveKey") }}', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json', 'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content, 'Accept': 'application/json' },
-            body: JSON.stringify({ wa_api_key: document.getElementById('waApiKey').value })
-        });
-        const data = await res.json();
-        if(data.success) {
-            showToast(data.message, 'success');
-            checkStatus(); // re-check with new key
-        } else {
-            showToast(data.message || 'Gagal menyimpan.', 'error');
-        }
-    } catch(err) {
-        showToast('Terjadi kesalahan.', 'error');
-    }
-    btn.textContent = oriText;
-    btn.disabled = false;
-}
+// API Key is automatically managed.
 
 async function generateApiKey(e, isSilent = false) {
     if(e) e.preventDefault();
@@ -145,7 +108,6 @@ async function generateApiKey(e, isSilent = false) {
         const data = await res.json();
         if (data.success) {
             showToast(data.message, 'success');
-            document.getElementById('waApiKey').value = data.key;
             checkStatus();
         } else {
             showToast(data.error || 'Gagal generate key.', 'error');
