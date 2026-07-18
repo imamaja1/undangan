@@ -126,12 +126,15 @@ async function saveApiKey(e) {
     btn.disabled = false;
 }
 
-async function generateApiKey(e) {
-    e.preventDefault();
+async function generateApiKey(e, isSilent = false) {
+    if(e) e.preventDefault();
     const btn = document.getElementById('btnGenerate');
-    const oriText = btn.textContent;
-    btn.textContent = 'Memproses...';
-    btn.disabled = true;
+    let oriText = '';
+    if(btn) {
+        oriText = btn.textContent;
+        btn.textContent = 'Memproses...';
+        btn.disabled = true;
+    }
 
     try {
         const res = await fetch('{{ route("admin.whatsapp.generateKey") }}', {
@@ -150,8 +153,11 @@ async function generateApiKey(e) {
     } catch (err) {
         showToast('Terjadi kesalahan koneksi.', 'error');
     }
-    btn.textContent = oriText;
-    btn.disabled = false;
+    
+    if(btn) {
+        btn.textContent = oriText;
+        btn.disabled = false;
+    }
 }
 
 async function checkStatus() {
@@ -227,10 +233,10 @@ async function checkStatus() {
 }
 
 async function forceInit() {
-    showToast('Meminta sesi baru...', 'success');
+    showToast('Meminta sesi baru ke server...', 'success');
     document.getElementById('btnInit').classList.add('hidden');
-    await loadQR();
-    setTimeout(checkStatus, 2000);
+    // Jika stuck di logged_out, cara paling bersih di server ini adalah membuat sesi App baru
+    await generateApiKey(null, true);
 }
 
 function updateUI(badge, text, classes) {
