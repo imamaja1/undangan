@@ -23,6 +23,21 @@ class GuestController extends Controller
         return $wedding->wedding_info['wa_api_key'] ?? '';
     }
 
+    private function cleanPhone($phone)
+    {
+        if (empty($phone)) return null;
+        
+        // Hapus semua karakter selain angka
+        $clean = preg_replace('/[^0-9]/', '', $phone);
+        
+        // Jika berawalan 0, ganti dengan 62
+        if (str_starts_with($clean, '0')) {
+            $clean = '62' . substr($clean, 1);
+        }
+        
+        return $clean;
+    }
+
     public function index()
     {
         $wedding = Wedding::with('guests')->firstOrFail();
@@ -42,7 +57,7 @@ class GuestController extends Controller
         $wedding = Wedding::firstOrFail();
         $guest = $wedding->guests()->create([
             'name' => $request->name,
-            'phone' => $request->phone,
+            'phone' => $this->cleanPhone($request->phone),
             'status' => 'pending'
         ]);
 
@@ -58,7 +73,7 @@ class GuestController extends Controller
 
         $guest->update([
             'name' => $request->name,
-            'phone' => $request->phone,
+            'phone' => $this->cleanPhone($request->phone),
         ]);
 
         return response()->json(['success' => true, 'guest' => $guest]);
@@ -91,7 +106,7 @@ class GuestController extends Controller
             if ($name) {
                 $wedding->guests()->create([
                     'name' => $name,
-                    'phone' => $phone,
+                    'phone' => $this->cleanPhone($phone),
                     'status' => 'pending'
                 ]);
                 $added++;
